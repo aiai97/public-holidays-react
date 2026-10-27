@@ -2,7 +2,7 @@ body {
     display: grid;
     place-items: center;
     background-color: #b4a7d6;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Neucha,sans-serif;
 }
 
 .wrapper {
@@ -32,4 +32,24 @@ h1 {
 .filter-item input {
     padding: 8px;
     box-sizing: border-box;
+}
+
+.filters button {
+    padding: 8px;
+    box-sizing: border-box;
+    margin: 0;
+    background-color: #b4a7d6;
+    color: #3d2f6b;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+.filters button:hover:not(:disabled) {
+    background-color: #8873be;
+    color: #fff;
+}
+
+.filters button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

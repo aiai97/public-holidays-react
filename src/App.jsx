@@ -28,6 +28,15 @@ function App() {
 
     const [validFrom, setValidFrom] = useState(`${today.slice(0, 4)}-01-01`);
     const [validTo, setValidTo] = useState(`${today.slice(0, 4)}-12-31`);
+    const [draftFrom, setDraftFrom] = useState(validFrom);
+    const [draftTo, setDraftTo] = useState(validTo);
+    const isDraftValid =
+        Boolean(draftFrom) && Boolean(draftTo) && draftFrom <= draftTo;
+
+    function handleSearch() {
+        setValidFrom(draftFrom);
+        setValidTo(draftTo);
+    }
 
     const {
         data: countries = [],
@@ -40,7 +49,8 @@ function App() {
 
     console.log("countries:", countries);
 
-    console.log("Fetching holidays for country:", countryCode, "validFrom:", validFrom, "validTo:", validTo);
+    const isDateRangeValid =
+        Boolean(validFrom) && Boolean(validTo) && validFrom <= validTo;
 
     const {
         data: holidays = [],
@@ -60,7 +70,7 @@ function App() {
                 `${API}/PublicHolidays?${params.toString()}`
             );
         },
-        enabled: Boolean(countryCode),
+        enabled: Boolean(countryCode) && isDateRangeValid,
     });
 
     if (countriesLoading) {
@@ -101,8 +111,8 @@ function App() {
                     <input
                         id="validFrom"
                         type="date"
-                        value={validFrom}
-                        onChange={event => setValidFrom(event.target.value)}
+                        value={draftFrom}
+                        onChange={event => setDraftFrom(event.target.value)}
                     />
                 </div>
 
@@ -111,10 +121,20 @@ function App() {
                     <input
                         id="validTo"
                         type="date"
-                        value={validTo}
-                        min={validFrom}
-                        onChange={event => setValidTo(event.target.value)}
+                        value={draftTo}
+                        min={draftFrom}
+                        onChange={event => setDraftTo(event.target.value)}
                     />
+                </div>
+
+                <div className="filter-item">
+                    <button
+                        type="button"
+                        onClick={handleSearch}
+                        disabled={!isDraftValid}
+                    >
+                        Search
+                    </button>
                 </div>
             </div>
             <h2>
@@ -126,11 +146,15 @@ function App() {
                     : countryCode}
             </h2>
 
-            {holidaysLoading && <p>Loading holidays...</p>}
+            {!isDateRangeValid && (
+                <p>Please select a valid start and end date.</p>
+            )}
 
-            {holidaysError && <p>Failed to load holidays.</p>}
+            {isDateRangeValid && holidaysLoading && <p>Loading holidays...</p>}
 
-            {!holidaysLoading && !holidaysError && (
+            {isDateRangeValid && holidaysError && <p>Failed to load holidays.</p>}
+
+            {isDateRangeValid && !holidaysLoading && !holidaysError && (
                 sortedHolidays.length > 0 ? (
                     <ul>
                         {sortedHolidays.map(holiday => (
