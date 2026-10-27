@@ -53,3 +53,12 @@ h1 {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+
+.accordion-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}

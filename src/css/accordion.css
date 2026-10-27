@@ -1,0 +1,132 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #1f2328;
+  background: #fff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding: clamp(36px, 8vw, 88px) 24px;
+  background: #fff;
+}
+
+.container {
+  width: min(100%, 1012px);
+  margin: 0 auto;
+}
+
+.container h1 {
+  max-width: 850px;
+  margin: 0 0 44px;
+  color: #1f2328;
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+}
+
+.container > div {
+  width: min(100%, 860px);
+}
+
+.accordion-item {
+  border-top: 1px solid #d1d9e0;
+}
+
+.accordion-item:last-child {
+  border-bottom: 1px solid #d1d9e0;
+}
+
+.accordion-title {
+  display: flex;
+  width: 100%;
+  min-height: 68px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 4px;
+  border: 0;
+  appearance: none;
+  background: transparent;
+  color: #1f2328;
+  font: inherit;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: left;
+  cursor: pointer;
+}
+
+.accordion-title:hover {
+  color: #0969da;
+}
+
+.accordion-title:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid #0969da;
+  outline-offset: 3px;
+}
+
+.accordion-icon {
+  flex: 0 0 auto;
+  color: #656d76;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.5;
+  transition: color 160ms ease;
+}
+
+.accordion-title:hover .accordion-icon {
+  color: #0969da;
+}
+
+.accordion-content {
+  max-width: 760px;
+  padding: 0 42px 24px 4px;
+  color: #656d76;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 40px 20px;
+  }
+
+  .container h1 {
+    margin-bottom: 30px;
+  }
+
+  .accordion-title {
+    min-height: 62px;
+    gap: 16px;
+    font-size: 1rem;
+  }
+
+  .accordion-content {
+    padding-right: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
